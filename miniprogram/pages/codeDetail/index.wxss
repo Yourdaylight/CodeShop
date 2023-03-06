@@ -1,0 +1,59 @@
+/* pages/codeDetail/codeDetail.wxss */
+
+/**index.wxss**/
+
+page {
+    padding-top: 54rpx;
+    background-color: #f6f6f6;
+    padding-bottom: 60rpx;
+  }
+  
+  .title {
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #000000;
+    margin-left: 5rpx;
+    font-size: 44rpx;
+    margin-bottom: 40rpx;
+    display: flex;
+    justify-content: center;/*水平居中*/
+  }
+  
+  .top_tip {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #888888;
+    margin-bottom: 28rpx;
+  }
+  
+  .power {
+    margin-top: 30rpx;
+    border-radius: 5px;
+    background-color: white;
+    width: 93%;
+    padding-bottom: 1rpx;
+  }
+
+
+  .buy {
+     margin-top: 25rpx;
+      background: blue;
+      color: white;
+      margin-bottom: 10rpx;
+  }
+  .img {
+    display: flex;
+    justify-content: center;/*水平居中*/
+    margin-top: 25rpx;
+  }
+
+  .info {
+    margin-left: 50rpx;
+  }
+
+  .price {
+    margin-bottom: 15rpx;
+    margin-left: 50rpx;
+    font-size: large;
+  }

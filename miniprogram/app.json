@@ -1,0 +1,41 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/deployService/index",
+        "pages/deployProject/index",
+        "pages/codeDetail/index",
+        "pages/chatgpt/index"
+    ],
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "ProgramTree",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+      "color": "#333333",
+      "selectedColor": "#48c7fe",
+      "backgroundColor": "#f7f7f7",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "iconPath": "images/tabbar/tab1.png",
+          "selectedIconPath": "images/tabbar/tab1-s.png",
+          "text": "源码集合"
+        },
+        {
+          "pagePath": "pages/chatgpt/index",
+          "iconPath": "images/tabbar/tab2.png",
+          "selectedIconPath": "images/tabbar/tab2-s.png",
+          "text": "智能问答"
+        }
+      ]
+    },
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents",
+    "usingComponents": {
+        "van-search": "./miniprogram_npm/vant-weapp/search/index",
+        "van-cell": "./miniprogram_npm/vant-weapp/cell/index"
+      }
+}

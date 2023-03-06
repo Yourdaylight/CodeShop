@@ -1,0 +1,19 @@
+<!--pages/codeDetail/codeDetail.wxml-->
+<view class="page">
+  <view class="title">{{project_name}}</view>
+  <view class="title">功能简介</view>
+  <view class="price" style="color: orange">{{price}}元</view>
+  <view class="info">{{info}}</view>
+
+  <view class="img">
+    <image  src="{{img_path}}"></image>
+  </view>
+
+</view>
+<button class="buy" bindtap="onBuy">获取链接</button>
+<view class="info">温馨提示：需要观看一个简短的广告后显示下载链接</view>
+
+<ad unit-id="adunit-fca6e9113418814f"></ad>
+
+
+

@@ -1,0 +1,10 @@
+<!--miniprogram/pages/deployService/index.wxml-->
+<view class="page">
+  <view class="title">功能介绍</view>
+  <view class="info">
+  <text>
+    有需要的朋友可以将需要讲解的代码发给我们q:752282360
+    代码讲解/辅导费用为150/h
+  </text>
+  </view>
+</view>

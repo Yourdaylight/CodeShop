@@ -1,0 +1,18 @@
+<view>
+  <view class="top_tip">项目部署请加q：752282360</view>
+  <view class="box_text" wx:if="{{!imgSrc}}">
+    <text>
+    所有项目的部署费用均为150元
+    (当前仅支持代码商店已有代码的部署)
+    </text>
+  </view>
+  <view  wx:if="{{imgSrc}}" class="code_box">
+    <image class="code_img" src="{{imgSrc}}"></image>
+    <view class="img_info">
+      <view class="img_info_title">文件路径</view>
+      <view class="img_info_detail">{{imgSrc}}</view>
+    </view>
+  </view>
+  <!-- #<view class="button" bindtap="uploadImg" wx:if="{{!haveGetImgSrc}}">我知道了</view> -->
+  <view class="button">我知道了</view>
+</view>
