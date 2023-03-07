@@ -4,8 +4,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
+          "name": "智能问答",
+          "pathName": "pages/chatgpt/index",
           "query": ""
         },
         {

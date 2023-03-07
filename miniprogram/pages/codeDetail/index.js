@@ -34,7 +34,6 @@ Page({
             adUnitId: 'adunit-c2ab4e350d636eed'
           })
           videoAd.onLoad(() => {
-
           })
           videoAd.onError((err) => {})
           videoAd.onClose((res) => {
@@ -71,8 +70,7 @@ Page({
   
           })
         }
-               
-
+              
         // 用户触发广告后，显示激励视频广告
         if (videoAd) {
           videoAd.show().catch(() => {

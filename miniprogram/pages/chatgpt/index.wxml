@@ -1,21 +1,28 @@
-<view class="container1">
+<view class="container1" data-weui-theme="light">
   <view class="title">一颗程序树 智能问答</view>
   <view class="itemView">
     <view class="you">开始与ChatGPT的对话吧：</view>
-    <input class="input1" type="text" name="content" placeholder="{{content}}" bindinput="getContent" value="{{content}}" />
-    <view class="view_btn"> 
-      <button class="loginBtn" type="primary" bindtap="loginBtnClick">发送</button> 
+    <input class="input1" type="text" name="content" placeholder="请输入你的问题或设置api" bindinput="getContent" value="{{content}}" />
+    <view class="view_btn">
+      <button class="loginBtn" type="primary" bindtap="loginBtnClick">发送</button>
       <button class="loginBtn" type="primary" bindtap="resetBtnClick">清除</button>
     </view>
-  </view> 
+    <view class="use-own-api">
+      <button class="set-api-btn" bindtap="inputApi">设置私有API</button>
+    </view>
+
+  </view>
   <view wx:for="{{messages}}" wx:key="index" class="chat-messages">
-    <view class="chat-bubble {{item.type}}">
-      <text class="chat-name">{{item.name}}</text>
-      <text class="chat-content">{{item.content}}</text>
+    <view slot="title" class="d-flex align-items-center">
+      <image class="avatar-image border-radius-lg" src="{{item.name=='chatgpt'?robotImg:userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="chat-bubble">
+      <text class="chat-name">{{item.name}} - {{item.currentDate}}</text>
+      <text class="chat-content {{item.type}}" bindtap="copyContent" data-copied="{{item.content}}">{{item.content}}</text>
     </view>
   </view>
   <view class="bottom">
-    <ad unit-id="adunit-fca6e9113418814f"></ad>
+    <ad unit-id="adunit-fca6e9113418814f" style="position: relative; left: -1rpx; top: 423rpx"></ad>
   </view>
 
 </view>

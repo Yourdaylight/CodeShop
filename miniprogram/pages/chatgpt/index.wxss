@@ -47,7 +47,7 @@
 
 .loginBtn {
   margin-top: 40rpx;
-  background: linear-gradient(to right, #f9957f, #f2f5d0, #aebaf8, #c973ff);
+  background: linear-gradient(to right,#f2f5d0,#f9957f);
   width: 50%;
   border-radius: 50rpx;
   color: #fff;
@@ -62,8 +62,22 @@
 
 .resetBtn {
   margin-top: 40rpx;
-  background: linear-gradient(to right, #f9957f, #f2f5d0, #aebaf8, #c973ff);
+  background: linear-gradient(to right,  #aebaf8, #c973ff);
   width: 50%;
+  border-radius: 50rpx;
+  color: #fff;
+  font-size: 28rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+}
+.set-api-btn {
+  margin-top: 40rpx;
+  background: linear-gradient(to right, #f9957f, #f2f5d0);
+  width: 100%;
   border-radius: 50rpx;
   color: #fff;
   font-size: 28rpx;
@@ -82,53 +96,80 @@
   width: 80%;
 }
 
+.use-own-api {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
 .chat-messages {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
-  margin-top: 2%;
+  margin-top: 3%;
 }
 
 .chat-bubble {
-    display: inline-block;
-    max-width: 70%;
-    padding: 10px;
+    display: flex-column;
+    max-width: 90%;
+    padding: 5rpx;
     border-radius: 10px;
     margin-bottom: 10px;
-  }
-
-  .chat-bubble.you {
-    background-color: #aebaf8;
-    color: #fff;
-    float: left;
-  }
-
-  .chat-bubble.me {
-    background-color: #f2f2f2;
-    color: #000;
-    float: right;
+    align-items: center;
+    justify-content: center;
   }
 
   .chat-name {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 5rpx;
+    
   }
 
-  .chat-content {
-    border: 2rpx solid #aebaf8;
+  .chat-content.me {
+    border: 1rpx solid orange;
     border-radius: 10rpx;
-    padding: 15rpx;
-    height: auto;
+    height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: 85vw;
+    padding-left: 3%;
+    width: 81vw;
+    align-items: left;
+    justify-content: center; /* Add this property */
+    color: #000;
+    float: left;
+    background-color: #f9957f;
+  }
+
+  .chat-content.you {
+    border: 1rpx solid orange;
+    border-radius: 10rpx;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3%;
+    width: 81vw;
+    align-items: left;
+    justify-content: center; /* Add this property */
+    color: black;
+    float: left;
+    background-color: #f2f5d0;
   }
 
   .bottom {
     /* position: fixed; */
     bottom: 0;
-    margin-top: 2%;
+   display: flex;
+   flex-direction: row;
+   margin-top: 2%;
     width: 100%;
+
   }
+
+.avatar-image{
+  width: 90rpx;
+  height: 90rpx;
+}
