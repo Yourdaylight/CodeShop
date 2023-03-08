@@ -16,6 +16,12 @@ Page({
         item: []
       },
       {
+        title: 'Python Web',
+        tip: '基于django, flask, fastapi的web系统',
+        showItem: false,
+        item: []
+      },
+      {
       title: '数据分析',
       tip: '机器学习，文本情感分析，金融数据分析',
       showItem: false,
@@ -25,7 +31,16 @@ Page({
       tip: 'spring boot, SSM',
       showItem: false,
       item: []
-    }, {
+    },{
+      title: '实用脚本',
+      tip: '持续更新实用脚本、爬虫脚本等',
+      showItem: false,
+      item: [ {
+        title: '待更新',
+        page: 'deployService'
+      }]
+    }, 
+    {
       title: '远程部署支持',
       tip: '项目部署,代码讲解',
       showItem: false,
@@ -38,12 +53,7 @@ Page({
         page: 'deployService'
       }
     ]
-    }, {
-      title: 'Python Web',
-      tip: '基于django, flask, fastapi的web系统',
-      showItem: false,
-      item: []
-    }],
+    }, ],
     envList,
     selectedEnv: envList[0],
     haveCreateCollection: true,
@@ -93,7 +103,10 @@ Page({
     }         
     else if(powerList[index].title === 'Java Web') {
       this.searchDbWithParam(index,{"language":"java"})
-    }              
+    }         
+    else if(powerList[index].title === '实用脚本') {
+      this.searchDbWithParam(index,{"language":"script"})
+    }                    
     else if(powerList[index].title === '搜索结果' && this.data.value) {
       var search_param = {
         "project_name":{

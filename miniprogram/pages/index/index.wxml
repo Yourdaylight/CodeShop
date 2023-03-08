@@ -15,9 +15,6 @@
   bind:change="onChange"
 	bind:cancel="onCancel">
 </van-search>
-<ad unit-id="adunit-60aaad1d5b1a2c5d"></ad>
-
-
   <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
     <view class="power_info" data-index="{{index}}" bindtap="onClickPowerInfo">
       <view class="power_info_text">
@@ -41,6 +38,7 @@
   <view class="img">
     <image src="cloud://cloud1-0gdh8xhva7c11eaa.636c-cloud1-0gdh8xhva7c11eaa-1310395233/programtree_qrcode.jpg"></image>
   </view>
+  <ad unit-id="adunit-60aaad1d5b1a2c5d"></ad>
   <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
 
 

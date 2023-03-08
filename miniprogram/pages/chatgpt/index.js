@@ -1,5 +1,9 @@
 // index.js
 // const app = getApp()
+import {
+  modal,
+  getUserProfile
+} from '../../utils/util';
 const {
   envList
 } = require('../../envList.js');
@@ -8,12 +12,12 @@ const db = wx.cloud.database({
 })
 const codeShopUsers = db.collection("codeShopUsers")
 // const db = getApp().globalData.db
-console.log(getApp().globalData)
 // pages/home/home.js
 var app = getApp()
 let videoAd = null
 Page({
   data: {
+    apiLimit:3,
     isloading: false,
     infoMess: '',
     content: '',
@@ -24,7 +28,6 @@ Page({
         "name": 'chatgpt',
         "content": `Hello!`,
         "currentDate": new Date().toLocaleString()
-
       },
     ],
     robotImg: '../../images/tabbar/tab2-s.png',
@@ -40,47 +43,18 @@ Page({
     openai_key: ""
   },
   //第一次获取用户信息
-  getUserProfile: function (e) {
-    wx.showLoading({
-      title: '登陆中，请稍候',
-    })
-    wx.getUserProfile({
-      desc: '获取您的微信昵称',
-      success: (res) => {
-        let userData = res.userInfo
-        wx.cloud.callFunction({
-          name: "getUserInfo",
-          data: {
-            "userData": userData
-          }
-        }).then((res) => {
-          wx.hideLoading()
-          wx.showToast({
-            title: '登陆成功！',
-          })
-          this.setData({
-            userInfo: res.result.userData,
-            hasUserInfo: true
-          })
-          wx.setStorageSync('userInfo', this.data.userInfo)
-        })
-
-      },
-      fail: function (e) {
-        wx.showToast({
-          title: '你选择了取消',
-          icon: "none",
-          duration: 1500,
-          mask: true
-        })
-      }
+  getUserInitialInfo(){
+    getUserProfile().then((res) => {
+      this.setData({
+        hasUserInfo: res.hasUserInfo,
+        userInfo: res.userInfo,
+      })
     })
   },
   onLoad: function (n) {
     this.setData({
       canIUseGetUserProfile: true
     })
-
   },
 
   onShow: function () {
@@ -92,12 +66,6 @@ Page({
         userInfo: n,
         hasUserInfo: true,
         canIUseGetUserProfile: true
-      })
-      // 通过wx.login获取登录凭证（code），然后通过code去获取我们用户的openid
-      wx.login({
-        success: (res) => {
-          console.log("登陆成功", res);
-        },
       })
     }
   },
@@ -123,7 +91,7 @@ Page({
   loginBtnClick: function () {
     var that = this;
     if (!that.data.hasUserInfo) {
-      that.getUserProfile()
+      that.getUserInitialInfo()
       return
     }
     var content = that.data.content.trim();
@@ -143,59 +111,77 @@ Page({
       messages: that.data.messages,
       content: ""
     });
-    if (that.data.messages.length > 5 & this.data.openai_key == "") {
+    if (that.data.messages.length > this.data.apiLimit && this.data.openai_key == "") {
       // 在页面onLoad回调事件中创建激励视频广告实例
-      wx.showModal({
-        title: '温馨提示',
-        content: "受限于api访问能力，若要继续当前对话需要观看广告;也可以点击界面清除按钮开启新一轮对话",
-        success: function (res) {
-          if (res.confirm) { //这里是点击了确定以后
-            if (wx.createRewardedVideoAd) {
-              videoAd = wx.createRewardedVideoAd({
-                adUnitId: 'adunit-c2ab4e350d636eed'
-              })
-              videoAd.onLoad(() => {})
-              videoAd.onError((err) => {})
-              videoAd.onClose((res) => {
-                if (res && res.isEnded) {
-                  that.sendChat()
-                } else {}
-              })
-            }
-            // 用户触发广告后，显示激励视频广告
-            if (videoAd) {
-              videoAd.show().catch(() => {
-                // 失败重试
-                videoAd.load()
-                  .then(() => videoAd.show())
-                  .catch(err => {
-                    console.log('激励视频 广告显示失败')
-                  })
-              })
-            }
-          } else { //这里是点击了取消以后
-            console.log('用户点击取消')
-          }
-        }
-      })
-
-    } else {
+      let ps = "受限于api访问能力，若要继续当前对话需要观看广告;也可以点击界面清除按钮开启新一轮对话"
+      this.showAdd(ps)
+      return
+    } else if(content.length>100 && content.length<800 && this.data.openai_key == ""){
+      let ps = "受限于api访问能力，若要输入长问题;需要观看广告授权"
+      this.showAdd(ps)
+      return
+    } else if(content.length>800){
+      let ps = "受限于api访问能力，最大支持800字的问题"
+      this.showAdd(ps)
+      return
+    }else {
       that.sendChat()
     }
 
   },
 
-  //检测用户是否使用apikey
+  //展示广告
+  showAdd:function(content){
+    wx.showModal({
+      title: '温馨提示',
+      content: content,
+      success: function (res) {
+        if (res.confirm) { //这里是点击了确定以后
+          if (wx.createRewardedVideoAd) {
+            videoAd = wx.createRewardedVideoAd({
+              adUnitId: 'adunit-c2ab4e350d636eed'
+            })
+            videoAd.onLoad(() => {})
+            videoAd.onError((err) => {})
+            videoAd.onClose((res) => {
+              if (res && res.isEnded) {
+                that.sendChat()
+              } else {}
+            })
+          }
+          // 用户触发广告后，显示激励视频广告
+          if (videoAd) {
+            videoAd.show().catch(() => {
+              // 失败重试
+              videoAd.load()
+                .then(() => videoAd.show())
+                .catch(err => {
+                  console.log('激励视频 广告显示失败')
+                })
+            })
+          }
+        } else { //这里是点击了取消以后
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  //检测用户是否使用apikey，是的话将api对话回合修改到99
   testApikey: function () {
     if (this.data.openai_key == "" && this.data.userInfo.openai_key) {
       wx.showModal({
         title: '注意！',
         content: '检测到你已经设置过私有apikey，本次是否使用你的私有key？',
         complete: (res) => {
-          if (res.cancel) {}
+          if (res.cancel) {
+            this.setData({
+              apiLimit:5
+            })
+          }
           if (res.confirm) {
             this.setData({
               openai_key: this.data.userInfo.openai_key,
+              apiLimit:99
             })
           }
         }
@@ -206,7 +192,7 @@ Page({
   inputApi: function () {
     var that = this
     if (!that.data.hasUserInfo) {
-      that.getUserProfile()
+      that.getUserInitialInfo()
       return
     }
     var content = that.data.content.trim();
@@ -214,7 +200,10 @@ Page({
       wx.showToast({
         title: '输入框不能为空，请输入你的openai的apikey。如果不再想使用你的apikey，可以点击界面清除按钮',
       })
-    } else {
+      
+    } else if(this.data.userInfo.nickName=="微信用户" || this.data.userInfo.nickName=="未授权用户"){
+      modal("信息更新","请先在-我的工具箱-点击头像和昵称进行更新")
+    }else {
       wx.showModal({
         title: 'apikey输入确认',
         content: '使用apikey不会有访问轮数限制。请确认你的apikey输入正确:' + content,
@@ -231,15 +220,14 @@ Page({
               })
               that.data.userInfo["openai_key"] = content
               this.setData({
-                userInfo: that.data.userInfo
+                userInfo: that.data.userInfo,
+                apiLimit:99
               })
             }).fail((err) => {
               wx.showToast({
                 title: '设置失败!',
               })
             })
-
-
           }
         }
       })
@@ -262,7 +250,8 @@ Page({
       data: {
         "question": this.data.messages,
         "apikey": this.data.openai_key,
-        "_openid": this.data.userInfo._openid
+        "_openid": this.data.userInfo._openid,
+        "nickname":this.data.userInfo.nickName
       },
       success: function (res) {
         let resp = res.data
@@ -274,6 +263,7 @@ Page({
         wx.hideLoading();
         if (resp.code === 200) {
           message.content = resp.data.answer
+          message.currentDate = new Date().toLocaleString()
           that.data.messages.push(message);
           that.setData({
             messages: that.data.messages
@@ -300,7 +290,14 @@ Page({
       openai_key: ""
     })
   },
-  
+  onChooseAvatar(e) {
+    this.userInfo.avatarUrl = e.detail.avatarUrl
+  },
+  ascertain(){
+    uni.navigateBack({
+      delta:1
+    })
+  },
   onShareAppMessage: function (res) {
     return {
       //分享的标题
