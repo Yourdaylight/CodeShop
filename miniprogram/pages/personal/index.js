@@ -29,6 +29,10 @@ Page({
         fun: 'toIpSearch'
       },
       {
+        name: '时间戳转换工具',
+        fun: 'toTimestamp'
+      },
+      {
         name: '清除缓存',
         fun: 'clearStorage'
       }, {
@@ -39,7 +43,7 @@ Page({
     ],
     userStatus: "未登陆，请点击头像登陆",
     userInfo: wx.getStorageSync('userInfo'),
-    versionNum: "2.4.1"
+    versionNum: "2.5.0"
   },
 
   /**
@@ -81,7 +85,8 @@ Page({
   //新版微信获取头像能力
   onChooseAvatar(e) {
     this.setData({
-      'userInfo.avatarUrl': e.detail.avatarUrl
+      'userInfo.avatarUrl': e.detail.avatarUrl,
+      modifiedInfo:true
     })
   },
   ascertain() {
@@ -123,6 +128,14 @@ Page({
       url: '/pages/personal/ipSearch/ipSearch',
     })
   },
+
+  //跳转到时间戳转换界面
+  toTimestamp(){
+    wx.navigateTo({
+      url: '/pages/personal/timestampUtil/timestampUtil',
+    })
+  },
+
 
   onHide() {
     if (this.data.userInfo.modifiedInfo) {

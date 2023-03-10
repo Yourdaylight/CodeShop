@@ -1,0 +1,31 @@
+<!--pages/personal/timestampUtil/timestampUtil.wxml-->
+<view class="container">
+  <view class="title">时间戳转换器</view>
+
+  <view class="time" bindtap="copyContent" data-copied="{{currentTimestamp}}">
+    <view class="time-label">当前时间戳(点击复制)：</view>
+    <view class="time-value">{{currentTimestamp}}</view>
+  </view>
+  <view class="time" bindtap="copyContent" data-copied="{{date}}">
+    <view class="time-label">当前日期(点击复制)：</view>
+    <view class="time-value">{{date}}</view>
+  </view>
+  <view class="input-container">
+    <label for="">时间戳转日期</label>
+    <input class="input" placeholder="请输入时间戳" bindinput="onInput" type="number" />
+  </view>
+  <view class="input-container">
+    <label for="">日期转时间戳</label>
+    <input class="input" type="text" placeholder="eg：2023-03-10 09:30:00" value="{{inputDate}}" bindinput="onInputDate" />
+  </view>
+  <view class="input-container">
+    <button class="button" bindtap="onConvert">转换</button>
+  </view>
+  <view class="result" bindtap="copyContent" data-copied="{{result}}">
+    转换结果(点击复制)：
+    <label class="result-value">{{result}}</label>
+  </view>
+  <view style="margin-top: 50rpx;">
+    <ad unit-id="adunit-1714275036158b99" ad-type="video" ad-theme="white"></ad>
+  </view>
+</view>
