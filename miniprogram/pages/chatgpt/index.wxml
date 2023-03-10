@@ -21,8 +21,8 @@
       <text class="chat-content {{item.type}}" bindtap="copyContent" data-copied="{{item.content}}">{{item.content}}</text>
     </view>
   </view>
-  <view class="bottom">
-    <ad unit-id="adunit-fca6e9113418814f" style="position: relative; left: -1rpx; top: 423rpx"></ad>
+  <view class="bottom" >
+    <ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white" ></ad>
   </view>
 
 </view>

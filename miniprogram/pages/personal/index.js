@@ -10,18 +10,23 @@ const db = wx.cloud.database({
   env: envList[0]
 })
 const codeShopUsers = db.collection("codeShopUsers")
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    modifiedInfo:false,//是否修改了个人信息
+    modifiedInfo: false, //是否修改了个人信息
     showLoading: false,
     style: 2,
     hasUserInfo: false,
     btns: [{
         name: '源码集合',
         fun: 'toIndex'
+      },
+      {
+        name: 'ip地址查询',
+        fun: 'toIpSearch'
       },
       {
         name: '清除缓存',
@@ -34,7 +39,7 @@ Page({
     ],
     userStatus: "未登陆，请点击头像登陆",
     userInfo: wx.getStorageSync('userInfo'),
-    versionNum:"2.2.3"
+    versionNum: "2.4.1"
   },
 
   /**
@@ -43,7 +48,7 @@ Page({
   onLoad: function (options) {
     if (wx.getStorageSync('userInfo')) {
       let userStatus = "已登录"
-      if(wx.getStorageSync('userInfo').nickName=="微信用户" && wx.getStorageSync('userInfo').avatarUrl=="https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132"){
+      if (wx.getStorageSync('userInfo').nickName == "微信用户" && wx.getStorageSync('userInfo').avatarUrl == "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132") {
         userStatus = "待更新头像/昵称信息"
       }
       this.setData({
@@ -59,18 +64,22 @@ Page({
    * 更新用户信息
    */
   updateUserInfo() {
-      getUserProfile().then((res) => {
-        this.setData({
-          hasUserInfo: res.hasUserInfo,
-          userInfo: res.userInfo,
-          userStatus: res.hasUserInfo ? "已登录" : "未登陆，请点击头像登陆"
-        })
+    getUserProfile().then((res) => {
+      this.setData({
+        hasUserInfo: res.hasUserInfo,
+        userInfo: res.userInfo,
+        userStatus: res.hasUserInfo ? "已登录" : "未登陆，请点击头像登陆"
       })
+    }).catch((err)=>{
+      this.setData({
+        hasUserInfo: err.hasUserInfo,
+        userInfo: err.userInfo,
+        userStatus: err.hasUserInfo ? "已登录" : "未登陆，请点击头像登陆"
+      })
+    })
   },
   //新版微信获取头像能力
   onChooseAvatar(e) {
-    console.log("换头像！")
-    console.log(e)
     this.setData({
       'userInfo.avatarUrl': e.detail.avatarUrl
     })
@@ -81,10 +90,11 @@ Page({
     })
   },
 
-  updateNickName(e){
-      this.setData({
-        "userInfo.nickName":e.detail.value
-      })
+  updateNickName(e) {
+    this.setData({
+      "userInfo.nickName": e.detail.value,
+      modifiedInfo:true
+    })
   },
   /**
    * 按钮统一点击事件
@@ -107,26 +117,36 @@ Page({
     })
   },
 
-  onHide(){
-    codeShopUsers.doc(this.data.userInfo._id).update({
-      data: {
-        "avatarUrl":this.data.userInfo.avatarUrl,
-        "nickName":this.data.userInfo.nickName
-      }
-    }).then((res) => {
-      wx.showToast({
-        title: '个人信息更新成功!',
-      })
-      this.setData({
-        userInfo: this.data.userInfo,
-        modified:false
-      })
-      wx.setStorageSync('userInfo', this.data.userInfo)
-    }).catch((err) => {
-      wx.showToast({
-        title: '个人信息更新失败!',
-      })
+  //跳转到ip查询界面
+  toIpSearch(){
+    wx.navigateTo({
+      url: '/pages/personal/ipSearch/ipSearch',
     })
+  },
+
+  onHide() {
+    if (this.data.userInfo.modifiedInfo) {
+      codeShopUsers.doc(this.data.userInfo._id).update({
+        data: {
+          "avatarUrl": this.data.userInfo.avatarUrl,
+          "nickName": this.data.userInfo.nickName
+        }
+      }).then((res) => {
+        wx.showToast({
+          title: '个人信息更新成功!',
+        })
+        this.setData({
+          userInfo: this.data.userInfo,
+          modifiedInfo: false
+        })
+        wx.setStorageSync('userInfo', this.data.userInfo)
+      }).catch((err) => {
+        wx.showToast({
+          title: '个人信息更新失败!',
+        })
+      })
+    }
+
   },
   /**
    * 清除小程序缓存

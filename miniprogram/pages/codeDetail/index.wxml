@@ -13,7 +13,8 @@
 <button class="buy" bindtap="onBuy">获取链接</button>
 <view class="info">温馨提示：需要观看一个简短的广告后显示下载链接</view>
 
-<ad unit-id="adunit-fca6e9113418814f"></ad>
+<ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white" style="margin-top:50rpx"></ad>
+
 
 
 

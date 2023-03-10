@@ -1,0 +1,64 @@
+/* pages/personal/ipSearch/ipSearch.wxss */
+
+@import '../../../miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
+.page-section-spacing {
+ margin-top: 0rpx;
+}
+
+.page-section-title {
+ text-align: center;
+ padding: 40rpx 0rpx 0rpx 0rpx;
+ color: #9b9b9b;
+ font-size: 36rpx;
+}
+@media (min-width: 320px) {
+ .ip-scroll {
+  height: 640rpx;
+ }
+}
+@media (min-width: 360px) {
+ .ip-scroll {
+  height: 816rpx;
+ }
+}
+@media (min-width: 375px) {
+ .ip-scroll {
+  height: 836rpx;
+ }
+}
+@media (min-width: 384px) {
+ .ip-scroll {
+  height: 826rpx;
+ }
+}
+@media (min-width: 414px) {
+ .ip-scroll {
+  height: 868rpx;
+ }
+}
+.scroll-view-item {
+ height: 90rpx;
+ line-height: 90rpx;
+ color: #000;
+ border-bottom: 1px solid #eee;
+ text-align: center;
+ vertical-align: middle;
+ margin: 0px 20px;
+}
+.view-item-ip {
+ line-height: 90rpx;
+ color: #2ab059;
+ display: inline-block;
+ font-size: 36rpx;
+}
+.weui-cell__bd {
+ color: #2ab059;
+}
+.ip-tip {
+ color: #eee;
+ font-size: 20rpx;
+ text-align: center;
+ padding-top: 20rpx;
+}
+

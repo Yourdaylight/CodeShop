@@ -11,6 +11,7 @@ const db = wx.cloud.database({
   env: envList[0]
 })
 const codeShopUsers = db.collection("codeShopUsers")
+const configs = db.collection("configs")
 // const db = getApp().globalData.db
 // pages/home/home.js
 var app = getApp()
@@ -22,7 +23,7 @@ Page({
     infoMess: '',
     content: '',
     chatname: '',
-    url: "https://programtree.cloud/chat?programtree=r_h&prompt=1",
+    url: "https://programtree.cloud/api/v1/chat?programtree=r_h&prompt=1",
     messages: [{
         "type": "me",
         "name": 'chatgpt',
@@ -52,6 +53,20 @@ Page({
     })
   },
   onLoad: function (n) {
+    configs.where({
+      name: "chatgpt"
+    }).get().then((res)=>{
+      let _config = res.data
+      if (_config.length>0){
+        this.setData({
+          apiLimit:_config[0].apiLimit,
+          url:_config[0].url
+        })
+      }
+    }).catch((err)=>{
+      console.log("error")
+      console.log(err)
+    })
     this.setData({
       canIUseGetUserProfile: true
     })

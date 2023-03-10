@@ -38,7 +38,7 @@
   <view class="img">
     <image src="cloud://cloud1-0gdh8xhva7c11eaa.636c-cloud1-0gdh8xhva7c11eaa-1310395233/programtree_qrcode.jpg"></image>
   </view>
-  <ad unit-id="adunit-60aaad1d5b1a2c5d"></ad>
+  <ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white" style="position: relative"></ad>
   <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
 
 

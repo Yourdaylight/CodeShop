@@ -1,0 +1,102 @@
+<!--pages/personal/ipSearch/ipSearch.wxml-->
+<view class="container" data-weui-theme="light">
+ <view class="page-body">
+  <view class="page-section-title">
+   <text style="position: relative; left: -1rpx; top: 16rpx">IP地址查询</text>
+  </view>
+  <view class="weui-search-bar {{searchFocusCss}}" id="searchBar" style="position: relative; left: 0rpx; top: 96rpx">
+   <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+     <icon class="weui-icon-search"></icon>
+     <input type="text" class="weui-search-bar__input" id="searchInput" placeholder="输入IP" confirm-type="search" bindinput="bindKeyInput" bindconfirm="searchIpSubmit" value="{{searchValue}}" focus="{{focus}}" />
+     <a href="javascript:" rel="external nofollow" class="weui-icon-clear" id="searchClear" bindtap="searchClearClick"></a> 
+    </view>
+    <view class="weui-search-bar__label" id="searchText" bindtap="searchTextClick" style="position: absolute; left: 2rpx; top: -2rpx">
+     <icon class="weui-icon-search"></icon>
+     <view class="weui-search-bar__label_span">搜索</view>
+    </view>
+   </view>
+   <view class="weui-search-bar__cancel-btn" id="searchCancel" bindtap="searchCancelClick">取消</view>
+  </view>
+ </view>
+ <view class="page-section">
+  <view class="page-section-title">
+   <text style="position: relative; left: -1rpx; top: 106rpx">查询结果</text>
+  </view>
+  <view class="page-section-spacing">
+   <scroll-view scroll-y="true" class="ip-scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" style="position: relative; left: 0rpx; top: 127rpx">
+    <view class="scroll-view-item">
+     <view class="view-item-ip"> {{r.ip}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">IP归属</view>
+     <view class="weui-cell__bd">
+      <text style="position: relative; left: 82rpx; top: 3rpx">{{r.areacode}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell" style="width: 454rpx; height: 90rpx; display: flex; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    
+      <view class="weui-cell__ft">国家/地区</view>
+     <view class="weui-cell__bd">
+      <text>{{r.country}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">省份</view>
+     <view class="weui-cell__bd">
+      <text>{{r.province}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">城市</view>
+     <view class="weui-cell__bd">
+      <text>{{r.city}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">县区</view>
+     <view class="weui-cell__bd">
+      <text>{{r.district}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">运营商</view>
+     <view class="weui-cell__bd">
+      <text>{{r.isp}}</text>
+     </view>
+
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__ft">经度</view>
+     <view class="weui-cell__bd">
+      <text>{{r.lng}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">纬度</view>
+     <view class="weui-cell__bd">
+      <text>{{r.lat}}</text>
+     </view>
+
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__ft">数据来源</view>
+     <view class="weui-cell__bd">
+      <text>{{r.version}}</text>
+     </view>
+
+    </view>
+   </scroll-view>
+   <ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white" style="position: relative; left: -2rpx; top: 225rpx; width: 191rpx; height: 263rpx; display: block; box-sizing: border-box"></ad>
+  </view>
+ </view>
+</view>
+
+
