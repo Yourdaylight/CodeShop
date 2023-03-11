@@ -22,28 +22,32 @@ Page({
     hasUserInfo: false,
     btns: [{
         name: '源码集合',
-        fun: 'toIndex'
+        fun: 'toIndex',
+        icon:'💻'
       },
       {
         name: 'ip地址查询',
-        fun: 'toIpSearch'
+        fun: 'toIpSearch',
+        icon:'🌏'
       },
       {
         name: '时间戳转换工具',
-        fun: 'toTimestamp'
+        fun: 'toTimestamp',
+        icon:'📅'
       },
       {
         name: '清除缓存',
-        fun: 'clearStorage'
+        fun: 'clearStorage',
+        icon:'🔧'
       }, {
         name: '退出小程序',
         fun: 'exitSys',
-        // ext_class: 'bg-grey color-white'
+        icon:'📍'
       }
     ],
     userStatus: "未登陆，请点击头像登陆",
     userInfo: wx.getStorageSync('userInfo'),
-    versionNum: "2.5.0"
+    versionNum: "2.6.0"
   },
 
   /**

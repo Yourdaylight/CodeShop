@@ -26,20 +26,17 @@
     <view class="buttons2 p-3 bg-white border-radius-lg" wx:if="{{style==2}}">
       <block wx:for="{{btns}}" wx:key="main_buttons2">
         <view class="button-item2 my-3 font-lg {{item.ext_class}}" data-index="{{index}}" bindtap="tapButton">
-          <image class="button-item2-icon mr-2" src="{{item.icon}}" mode="widthFix"></image>
+          <view class="button-item2-icon mr-2" >
+            {{item.icon}}</view>
           <view class="flex-grow-1">{{item.name}}</view>
           <mp-icon icon="arrow" size="13" color="{{colorGrey}}"></mp-icon>
         </view>
         <view class="split-line"></view>
       </block>
     </view>
-
-
-
     <!-- 底部描述 -->
     <view class="text-center">
       <text class="color-grey">v {{versionNum}}</text>
     </view>
-
   </view>
 </view>

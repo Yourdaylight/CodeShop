@@ -1,59 +1,72 @@
-/* pages/codeDetail/codeDetail.wxss */
+.page {
+  padding: 54rpx 0 60rpx;
+  background-color: #f6f6f6;
+}
 
-/**index.wxss**/
+.title {
+  font-family: "PingFang SC", sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 44rpx;
+  margin: 0 auto 40rpx;
+  text-align: center;
+}
 
-page {
-    padding-top: 54rpx;
-    background-color: #f6f6f6;
-    padding-bottom: 60rpx;
-  }
-  
-  .title {
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #000000;
-    margin-left: 5rpx;
-    font-size: 44rpx;
-    margin-bottom: 40rpx;
-    display: flex;
-    justify-content: center;/*水平居中*/
-  }
-  
-  .top_tip {
-    font-size: 28rpx;
-    font-family: PingFang SC;
-    font-weight: 400;
-    color: #888888;
-    margin-bottom: 28rpx;
-  }
-  
-  .power {
-    margin-top: 30rpx;
-    border-radius: 5px;
-    background-color: white;
-    width: 93%;
-    padding-bottom: 1rpx;
-  }
+.top_tip {
+  font-size: 28rpx;
+  font-family: "PingFang SC", sans-serif;
+  font-weight: 400;
+  color: #888888;
+  margin-bottom: 28rpx;
+  text-align: center;
+}
+
+.power {
+  margin-top: 30rpx;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 93%;
+  padding-bottom: 1rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.16), 0 2rpx 4rpx rgba(0, 0, 0, 0.12);
+}
+
+.buy {
+  margin: 15rpx auto 15rpx;
+  background-color: #2196f3;
+  color: #ffffff;
+  display: block;
+  border-radius: 20rpx;
+  font-size: 25rpx;
+  letter-spacing: 1ch;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.buy:hover {
+  background-color: #1e88e5;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25rpx;
+}
+
+.info {
+  margin: 30rpx 30rpx;
+  font-size: 28rpx;
+  color: #333333;
+  border-radius: 10rpx;
+  justify-content: center;
+}
 
 
-  .buy {
-     margin-top: 25rpx;
-      background: blue;
-      color: white;
-      margin-bottom: 10rpx;
-  }
-  .img {
-    display: flex;
-    justify-content: center;/*水平居中*/
-    margin-top: 25rpx;
-  }
-
-  .info {
-    margin-left: 50rpx;
-  }
-
-  .price {
-    margin-bottom: 15rpx;
-    margin-left: 50rpx;
-    font-size: large;
-  }
+.price {
+  margin: 0 0 10rpx 50rpx;
+  font-size: 29rpx;
+  color: #ff9800;
+  font-weight: bold;
+}

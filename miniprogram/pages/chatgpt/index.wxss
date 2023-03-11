@@ -156,7 +156,6 @@
     justify-content: center; /* Add this property */
     color: black;
     float: left;
-    background-color: #f2f5d0;
   }
 
   .bottom {
@@ -170,4 +169,28 @@
 .avatar-image{
   width: 90rpx;
   height: 90rpx;
+}
+
+.announce {
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  border: 2rpx solid #000;
+  border-radius: 20rpx;
+}
+.text-container {
+  margin-top: 10rpx;
+}
+.announce-icon {
+  margin-right: 10rpx;
+  color: rgb(0, 4, 255);
+}
+
+.announce-content {
+  color: #1e2412;
+  font-weight: bold;
+  text-decoration: underline;
 }

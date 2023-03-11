@@ -3,35 +3,39 @@
 const { envList } = require('../../envList.js');
 const db = wx.cloud.database({env:envList[0]})
 // const db = getApp().globalData.db
-console.log(getApp().globalData)
 Page({
   data: {
     showUploadTip: false,
     value:"",
     powerList: [
       {
+        icon:"🔍 ",
         title: '搜索结果',
         tip: '',
         showItem: false,
         item: []
       },
       {
+        icon:'🐍 ',
         title: 'Python Web',
         tip: '基于django, flask, fastapi的web系统',
         showItem: false,
         item: []
       },
       {
+        icon:"📊 ",
       title: '数据分析',
       tip: '机器学习，文本情感分析，金融数据分析',
       showItem: false,
       item: []
     }, {
+      icon:"☕ ",
       title: 'Java Web',
       tip: 'spring boot, SSM',
       showItem: false,
       item: []
     },{
+      icon:"🕸 ",
       title: '实用脚本',
       tip: '持续更新实用脚本、爬虫脚本等',
       showItem: false,
@@ -41,16 +45,18 @@ Page({
       }]
     }, 
     {
-      title: '远程部署支持',
-      tip: '项目部署,代码讲解',
+      icon:"📌 ",
+      title: '开发项目定制',
+      tip: '毕业设计指导，项目定制，代码讲解/部署',
       showItem: false,
-      item: [{
-        title: '项目部署',
+      item: [
+        {
+          title: '项目定制/设计指导',
+          page: 'deployService'
+        },
+        {
+        title: '代码讲解/部署',
         page: 'deployProject'
-      },
-      {
-        title: '代码讲解',
-        page: 'deployService'
       }
     ]
     }, ],

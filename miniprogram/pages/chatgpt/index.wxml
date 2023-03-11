@@ -1,8 +1,12 @@
 <view class="container1" data-weui-theme="light">
-  <view class="title">一颗程序树 智能问答</view>
+  <view class="title">一颗程序树 🎭 智能问答</view>
   <view class="itemView">
     <view class="you">开始与ChatGPT的对话吧：</view>
     <input class="input1" type="text" name="content" placeholder="请输入你的问题或设置api" bindinput="getContent" value="{{content}}" />
+    <view wx:if="{{showAnnounce}}" class="announce">
+      <text class="announce-content">{{ announce }}</text>
+    </view>
+
     <view class="view_btn">
       <button class="loginBtn" type="primary" bindtap="loginBtnClick">发送</button>
       <button class="loginBtn" type="primary" bindtap="resetBtnClick">清除</button>
@@ -21,8 +25,8 @@
       <text class="chat-content {{item.type}}" bindtap="copyContent" data-copied="{{item.content}}">{{item.content}}</text>
     </view>
   </view>
-  <view class="bottom" >
-    <ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white" ></ad>
+  <view class="bottom">
+    <ad unit-id="adunit-8930b4704bbb8960" ad-type="video" ad-theme="white"></ad>
   </view>
 
 </view>

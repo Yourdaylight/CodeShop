@@ -2,7 +2,7 @@
 <view class="container" data-weui-theme="light">
  <view class="page-body">
   <view class="page-section-title">
-   <text style="position: relative; left: -1rpx; top: 16rpx">IP地址查询</text>
+   <text style="position: relative; left: -1rpx; top: 16rpx">🌏IP地址查询</text>
   </view>
   <view class="weui-search-bar {{searchFocusCss}}" id="searchBar" style="position: relative; left: 0rpx; top: 96rpx">
    <view class="weui-search-bar__form">

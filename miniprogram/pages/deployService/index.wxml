@@ -1,10 +1,9 @@
 <!--miniprogram/pages/deployService/index.wxml-->
 <view class="page">
-  <view class="title">功能介绍</view>
+  <view class="title">项目定制介绍🛴</view>
   <view class="info">
-  <text>
-    有需要的朋友可以将需要讲解的代码发给我们q:752282360
-    代码讲解/辅导费用为150/h
-  </text>
+    <text user-select="">{{content}}</text>
   </view>
+  <image src="{{url}}"style="margin-top: 50rpx;"/>
+  <button open-type="contact" style="margin-top: 50rpx;">联系我们</button>
 </view>

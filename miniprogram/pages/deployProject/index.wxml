@@ -1,8 +1,9 @@
 <view>
-  <view class="top_tip">项目部署请加q：752282360</view>
+  <view class="top_tip">项目部署请加q：752282360或者点击下方联系客服</view>
   <view class="box_text" wx:if="{{!imgSrc}}">
     <text>
     所有项目的部署费用均为150元
+    代码讲解费用为200元/h，可以根据您提供的内容做讲解
     (当前仅支持代码商店已有代码的部署)
     </text>
   </view>
@@ -14,5 +15,5 @@
     </view>
   </view>
   <!-- #<view class="button" bindtap="uploadImg" wx:if="{{!haveGetImgSrc}}">我知道了</view> -->
-  <view class="button">我知道了</view>
+  <button open-type="contact" style="position: relative;">联系客服</button>
 </view>

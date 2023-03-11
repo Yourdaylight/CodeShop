@@ -31,6 +31,8 @@ Page({
         "currentDate": new Date().toLocaleString()
       },
     ],
+    showAnnounce:false,
+    announce:"",//公告栏，当小程序更新时将广告展示在这里
     robotImg: '../../images/tabbar/tab2-s.png',
     //用户基本信息(头像、昵称)
     userInfo: {
@@ -58,9 +60,15 @@ Page({
     }).get().then((res)=>{
       let _config = res.data
       if (_config.length>0){
+        let checkShowAnnounce=false
+        if (_config[0].announce.length>0){
+          checkShowAnnounce=true
+        }
         this.setData({
           apiLimit:_config[0].apiLimit,
-          url:_config[0].url
+          url:_config[0].url,
+          announce:_config[0].announce,
+          showAnnounce:checkShowAnnounce
         })
       }
     }).catch((err)=>{
