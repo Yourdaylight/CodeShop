@@ -1,6 +1,5 @@
 /* pages/personal/ipSearch/ipSearch.wxss */
 
-@import '../../../miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
 
 .page-section-spacing {
  margin-top: 0rpx;

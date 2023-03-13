@@ -35,7 +35,34 @@ Page({
           })
           videoAd.onLoad(() => {
           })
-          videoAd.onError((err) => {})
+          videoAd.onError((err) => {
+            wx.showModal({
+              title: '复制到剪贴板',
+              content: this.data.buy_url,
+              success: function (res) {
+                if (res.confirm) { //这里是点击了确定以后
+                  wx.setClipboardData({
+                    data: that.data.buy_url, //需要复制的内容
+                    success: function (res) { //成功回调函数
+                      wx.showModal({
+                        title: '提示',
+                        content: '复制成功',
+                        success: function (res) {
+                          if (res.confirm) {
+                            console.log('确定')
+                          } else if (res.cancel) {
+                            console.log('取消')
+                          }
+                        }
+                      })
+                    }
+                  })
+                } else { //这里是点击了取消以后
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          })
           videoAd.onClose((res) => {
             if (res && res.isEnded){
               wx.showModal({
@@ -70,7 +97,6 @@ Page({
   
           })
         }
-              
         // 用户触发广告后，显示激励视频广告
         if (videoAd) {
           videoAd.show().catch(() => {

@@ -3,44 +3,36 @@
  * @param {*} xdata 
  */
 
-   //第一次获取用户信息
-  export function getUserProfile(e){
-    wx.showLoading({
-      title: '登陆中，请稍候',
+//第一次获取用户信息
+export function getUserProfile(e) {
+  wx.showLoading({
+    title: '加载中，请稍候',
+  })
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: "getUserInfo",
+      data: {
+        "userData": {}
+      },
+      success: res => {
+        wx.hideLoading()
+        wx.setStorageSync('userInfo', res.result.userData)
+        resolve({
+          "userInfo": res.result.userData,
+          "hasUserInfo": true
+        })
+      },
+      fail: e => {
+        wx.hideLoading()
+        reject({
+          "userInfo": {},
+          "hasUserInfo": false
+        })
+      }
     })
-    return new Promise((resolve,reject)=>{
-      wx.getUserProfile({
-        desc: '获取您的微信昵称',
-        success: (res) => {
-          let userData = res.userInfo
-          wx.cloud.callFunction({
-            name: "getUserInfo",
-            data: {
-              "userData": userData
-            }
-          }).then((res) => {
-            wx.hideLoading()
-            wx.showToast({
-              title: '登陆成功！',
-            })
-            wx.setStorageSync('userInfo', res.result.userData)
-            resolve({
-              "userInfo": res.result.userData,
-              "hasUserInfo": true
-            })
-          })
-        },
-        fail: function (e) {
-          wx.hideLoading()
-          reject({
-            "userInfo": {},
-            "hasUserInfo": false
-          })
-        }
-      })
-    })
+  })
 
-  }
+}
 export function transitionXdata(xdata) {
   if (xdata == "" || xdata.indexOf(":") == -1) return xdata;
   var dataobj = {};
@@ -207,6 +199,7 @@ export function autoAuthSubscript(flag = 0, check = false) {
           }
         })
       }
+
       function auth(tmplIds) {
         wx.requestSubscribeMessage({
           tmplIds: tmplIds,
@@ -218,6 +211,7 @@ export function autoAuthSubscript(flag = 0, check = false) {
           }
         })
       }
+
       function getFlag(f) {
         f = String(f);
         switch (f) {
@@ -238,10 +232,10 @@ export function autoAuthSubscript(flag = 0, check = false) {
  * 时间格式化
  */
 
-export function getLocalTime(i) { 
+export function getLocalTime(i) {
   if (typeof i !== 'number') return;
 
- var d = new Date(); 
+  var d = new Date();
   //得到1970年一月一日到现在的秒数 
   var len = d.getTime();
   //本地时间与GMT时间的时间偏移差(注意：GMT这是UTC的民间名称。GMT=UTC）
@@ -280,7 +274,7 @@ export function formatSeconds(value) {
   let s = Math.floor((result % 60)) < 10 ? '0' + Math.floor((result % 60)) : Math.floor((result % 60));
 
   let res = '';
-  if(h !== '00') res += `${h}:`;
+  if (h !== '00') res += `${h}:`;
   res += `${m}:`;
   res += `${s}`;
   return res;
@@ -410,7 +404,8 @@ export function setString(str, len) {
  */
 export function stringLength(value) {
   if (!value) return 0;
-  var len = 0, code = 0;
+  var len = 0,
+    code = 0;
   for (var i = 0; i < value.length; i++) {
     code = value.charCodeAt(i);
     if (code >= 0 && code <= 127) {
@@ -593,7 +588,7 @@ export function downloadFile(url, cloud = false) {
  * @param {String} url 链接
  */
 export function isNetworkUrl(url) {
-  var isFormwork = true;//是否是网络资源
+  var isFormwork = true; //是否是网络资源
   try {
     //判断本地是否存在该文件
     wx.getFileSystemManager().accessSync(url);
@@ -613,7 +608,7 @@ export function checkIdCardNumber(value) {
   let len = stringLength(value);
   if (len == 18) {
     let re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
-    var arrSplit = value.match(re);  //检查生日日期是否正确，value就是身份证号
+    var arrSplit = value.match(re); //检查生日日期是否正确，value就是身份证号
     var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);
     var bGoodDay;
     bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4]));
@@ -622,12 +617,12 @@ export function checkIdCardNumber(value) {
       //alert(arrSplit[2]);
       //alert('输入的身份证号里出生日期不对！');
       return false;
-    }
-    else { //检验18位身份证的校验码是否正确。 //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+    } else { //检验18位身份证的校验码是否正确。 //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
       var valnum;
       var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
       var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-      var nTemp = 0, i;
+      var nTemp = 0,
+        i;
       for (i = 0; i < 17; i++) {
         nTemp += value.substr(i, 1) * arrInt[i];
       }
@@ -655,7 +650,8 @@ export function createRandomStr(randomLen = false, min = 32, max = 64) {
       'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
       'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
       'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    ];
   // 随机产生
   if (randomLen) {
     range = Math.round(Math.random() * (max - min)) + min;
@@ -668,21 +664,21 @@ export function createRandomStr(randomLen = false, min = 32, max = 64) {
 }
 
 /*请求获取订阅通知权限 */
-export function getSubscribe(){
+export function getSubscribe() {
   wx.requestSubscribeMessage({
     tmplIds: ['XVd6khEbN4k2VVv3X5p6iJybR5BhOdS8n-q6QLu14iI'],
-    success(res) { 
+    success(res) {
       console.log(res)
     },
-    fail(res) { 
+    fail(res) {
       console.log(res)
     }
   })
 }
 /*获取用户当前位置*/
-export function getWeather(location){
-    
-} 
+export function getWeather(location) {
+
+}
 /**
  * 上传媒体文件
  * @param {*} cloudPathPrefix 云存储路径前缀
@@ -707,4 +703,3 @@ export function uploadMedia(cloudPathPrefix, tempFilePath) {
     });
   });
 }
-

@@ -1,0 +1,21 @@
+<!--pages/personal/gitDownload/gitDownload.wxml-->
+<view class="container" data-weui-theme="light">
+  <view class="title">GitHub项目下载</view>
+  <view class="input-section">
+    <input class="input-box" placeholder="请输入GitHub项目链接" bindinput="onInput" />
+    <button class="download-button" bindtap="submitDownload">下载</button>
+  </view>
+  
+  <mp-cells title='我的下载'>
+    <mp-cell value="标题文字" footer="说明文字"></mp-cell>
+    <mp-cell>
+      <view>标题文字（使用slot）</view>
+      <view slot="footer">说明文字</view>
+    </mp-cell>
+  </mp-cells>
+</view>
+
+
+
+
+

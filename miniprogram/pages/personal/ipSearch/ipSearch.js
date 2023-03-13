@@ -53,7 +53,9 @@ Page({
               adUnitId: 'adunit-c2ab4e350d636eed'
             })
             videoAd.onLoad(() => {})
-            videoAd.onError((err) => {})
+            videoAd.onError((err) => {
+              that.searchSubmit()
+            })
             videoAd.onClose((res) => {
               if (res && res.isEnded) {
                 that.searchSubmit()

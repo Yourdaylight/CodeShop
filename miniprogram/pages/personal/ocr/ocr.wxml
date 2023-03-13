@@ -1,0 +1,23 @@
+<!--pages/personal/ocr/ocr.wxml-->
+
+<view class="container">
+  <view class="section">
+    <ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{false}}">
+      <button class="btn-primary">身份证正面识别</button>
+    </ocr-navigator>
+    <ocr-navigator bind:onSuccess="success" certificateType="idCard" opposite="{{true}}">
+      <button class="btn-primary">身份证反面识别</button>
+    </ocr-navigator>
+  </view>
+  <view class="section">
+    <ocr-navigator bind:onSuccess="success" certificateType="bankCard">
+      <button class="btn-primary">银行卡识别</button>
+    </ocr-navigator>
+  </view>
+  <view class="section">
+    <ocr-navigator bind:onSuccess="success" certificateType="menu">
+      <button class="btn-primary">菜单识别</button>
+    </ocr-navigator>
+  </view>
+<view class="result-section">识别出来的内容：{{ text }}</view>
+</view>

@@ -155,6 +155,7 @@ Page({
 
   //展示广告
   showAdd:function(content){
+    let that = this
     wx.showModal({
       title: '温馨提示',
       content: content,
@@ -165,7 +166,9 @@ Page({
               adUnitId: 'adunit-c2ab4e350d636eed'
             })
             videoAd.onLoad(() => {})
-            videoAd.onError((err) => {})
+            videoAd.onError((err) => {
+              that.sendChat()
+            })
             videoAd.onClose((res) => {
               if (res && res.isEnded) {
                 that.sendChat()
@@ -299,6 +302,7 @@ Page({
           title: 'API访问异常，请稍后重试',
           icon: 'none'
         })
+        wx.showReq
       }
     })
   },

@@ -23,31 +23,37 @@ Page({
     btns: [{
         name: '源码集合',
         fun: 'toIndex',
-        icon:'💻'
+        icon: '💻'
+      },
+      {
+        name: 'OCR识别',
+        fun: 'toOcr',
+        icon: '📷'
       },
       {
         name: 'ip地址查询',
         fun: 'toIpSearch',
-        icon:'🌏'
+        icon: '🌏'
       },
       {
         name: '时间戳转换工具',
         fun: 'toTimestamp',
-        icon:'📅'
+        icon: '📅'
       },
       {
-        name: '清除缓存',
-        fun: 'clearStorage',
-        icon:'🔧'
-      }, {
-        name: '退出小程序',
-        fun: 'exitSys',
-        icon:'📍'
+        name: 'Github加速下载',
+        fun: 'toGitDownload',
+        icon: '📍'
+      },
+      {
+        name: '联系我们',
+        fun: 'contactUs',
+        icon: '🔧'
       }
     ],
     userStatus: "未登陆，请点击头像登陆",
     userInfo: wx.getStorageSync('userInfo'),
-    versionNum: "2.6.0"
+    versionNum: "2.6.2"
   },
 
   /**
@@ -73,12 +79,14 @@ Page({
    */
   updateUserInfo() {
     getUserProfile().then((res) => {
+      console.log("res")
       this.setData({
         hasUserInfo: res.hasUserInfo,
         userInfo: res.userInfo,
         userStatus: res.hasUserInfo ? "已登录" : "未登陆，请点击头像登陆"
       })
-    }).catch((err)=>{
+    }).catch((err) => {
+      console.log(err)
       this.setData({
         hasUserInfo: err.hasUserInfo,
         userInfo: err.userInfo,
@@ -90,7 +98,7 @@ Page({
   onChooseAvatar(e) {
     this.setData({
       'userInfo.avatarUrl': e.detail.avatarUrl,
-      modifiedInfo:true
+      modifiedInfo: true
     })
   },
   ascertain() {
@@ -102,7 +110,7 @@ Page({
   updateNickName(e) {
     this.setData({
       "userInfo.nickName": e.detail.value,
-      modifiedInfo:true
+      modifiedInfo: true
     })
   },
   /**
@@ -127,16 +135,52 @@ Page({
   },
 
   //跳转到ip查询界面
-  toIpSearch(){
+  toIpSearch() {
     wx.navigateTo({
       url: '/pages/personal/ipSearch/ipSearch',
     })
   },
+  //跳转到git下载
+  toGitDownload() {
+    if (this.data.hasUserInfo == false) {
+      modal("登陆提醒", "请先点击头像登陆后使用该功能")
+    } else {
+      wx.navigateTo({
+        url: `/pages/personal/gitDownload/gitDownload?userInfo=${JSON.stringify(this.data.userInfo)}`
+      })
+    }
+  },
+
+  //ocr识别
+  toOcr() {
+    // wx.navigateTo({
+    //   url: '/pages/personal/ocr/ocr',
+    // })
+    wx.showModal({
+      title: '敬请期待',
+      content: '该功能将于3.24前更新，支持免费OCR识别，包括身份证识别，车牌识别，银行卡识别以及照片增强。',
+      complete: (res) => {
+        if (res.cancel) {
+
+        }
+
+        if (res.confirm) {
+
+        }
+      }
+    })
+  },
 
   //跳转到时间戳转换界面
-  toTimestamp(){
+  toTimestamp() {
     wx.navigateTo({
       url: '/pages/personal/timestampUtil/timestampUtil',
+    })
+  },
+  //跳转到联系我们界面
+  contactUs() {
+    wx.navigateTo({
+      url: '/pages/deployService/index',
     })
   },
 
